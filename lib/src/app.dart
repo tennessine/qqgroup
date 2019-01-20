@@ -9,6 +9,16 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int currentIndex = 0;
+  String get title {
+    switch (currentIndex) {
+      case 0:
+        return 'foo';
+      case 1:
+        return 'bar';
+      default:
+        return 'baz';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +82,9 @@ class _AppState extends State<App> {
             ),
             title: Text('what ever'),
           ),
-          body: Text('data'),
+          body: Center(
+            child: Text(title),
+          ),
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
