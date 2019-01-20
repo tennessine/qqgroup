@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../src/screens/foo_screen.dart';
-import '../src/screens/bar_screen.dart';
-
 class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -12,23 +9,70 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int currentIndex = 0;
-  Widget get component {
-    if (currentIndex == 0) {
-      return FooScreen();
-    } else {
-      return BarScreen();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('What ever'),
+        key: scaffoldKey,
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Text('Drawer Header'),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: Text('Item 1'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text('Item 2'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text('Item 3'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text('Item 4'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text('Item 5'),
+                  onTap: () {},
+                )
+              ],
+            ),
           ),
-          body: component,
+          appBar: AppBar(
+            leading: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  scaffoldKey.currentState.openDrawer();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage("http://localhost/avatar.png"),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            title: Text('what ever'),
+          ),
+          body: Text('data'),
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
